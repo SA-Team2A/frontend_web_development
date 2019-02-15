@@ -10,6 +10,7 @@ import RecipesList from './RecipesList'
 import { Link } from 'react-router-dom'
 import Loading from '../utilities/Loading'
 import CollectionsList from './CollectionsList'
+import DeleteProfileModal from './DeleteProfileModal'
 
 export default class MyProfile extends Component {
 
@@ -122,8 +123,8 @@ export default class MyProfile extends Component {
                       <i className="material-icons text-left">settings</i>
                     </button>
                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                      <Link to="#!" className="dropdown-item">Actualizar perfil</Link>
-                      <Link to="#!" className="dropdown-item">Borrar perfil</Link>
+                      <Link to="/update_profile" className="dropdown-item">Actualizar perfil</Link>
+                      <Link to="#!" className="dropdown-item" data-toggle="modal" data-target="#delete_profile">Elminar perfil</Link>
                     </div>
                   </div>
                 </div>
@@ -174,6 +175,7 @@ export default class MyProfile extends Component {
               </div>
             </div>
           </div>
+          <DeleteProfileModal/>
         </div>
       )
     } else if (isLoaded == null) {

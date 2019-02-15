@@ -92,9 +92,9 @@ export default class Recipe extends Component {
       const username = currentUser.username
 
       return (
-        <div className="col-md-8 offset-md-2">
-          <div className="row">
-            <h1 className="">{ name }</h1>
+        <div className="col-md-8 offset-md-2 ">
+          <div className="row mt-5">
+            <h1 className="cookie-font">{ name }</h1>
           </div>
           <div className="row">
             <i className="material-icons">alarm</i>
