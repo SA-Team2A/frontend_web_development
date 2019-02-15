@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom'
 export default class RecipesList extends Component {
 
   render() {
-    const { recipes, own } = this.props
+    const { recipes } = this.props
 
     const list = recipes.map((recipe, index) =>
-      (<Link to={`/recipe/${recipe._id}`} className="list-group-item list-group-item-action" key={ index }>
+      (<Link to={ `/recipe/${ recipe._id }` } className="list-group-item list-group-item-action" key={ index }>
         <RecipeTile recipe={ recipe } />
       </Link>)
     )

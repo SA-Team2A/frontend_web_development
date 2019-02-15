@@ -12,7 +12,7 @@ export default class CommentCreator extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      comments: props.comments
+      comments: props.comments.reverse()
     }
   }
 
@@ -44,10 +44,9 @@ export default class CommentCreator extends Component {
       res => {
         const newComment = res.data.data.createComment
         newComment['username'] = this.props.currentUser.username
-        const currComments = this.state.comments
-        const updateComments = currComments.slice()
-        updateComments.push(newComment)
-        this.setState({ comments: updateComments })
+        const currComments = this.state.comments.reverse().slice()
+        currComments.push(newComment)
+        this.setState({ comments: currComments.reverse() })
       }
     ).catch(
       err => {
@@ -61,7 +60,6 @@ export default class CommentCreator extends Component {
     const { comments } = this.state
     return (
       <div>
-        <CommentList list={ comments } />
         <form className="w-100" onSubmit={ (e) => this.handleSubmit(e) }>
           <div className="form-group row">
             <div className="col-md-2 text-center my-auto">
@@ -78,6 +76,8 @@ export default class CommentCreator extends Component {
             </div>
           </div>
         </form>
+        <hr/>
+        <CommentList list={ comments } />
       </div>
     )
   }

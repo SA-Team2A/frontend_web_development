@@ -5,7 +5,6 @@ import no_collection from '../../assets/collection.png'
 
 // Components
 import { Link } from 'react-router-dom'
-import CollectionCreator from '../collections/CollectionCreator'
 
 export default class CollectionsList extends Component {
   render() {
@@ -24,14 +23,11 @@ export default class CollectionsList extends Component {
     )
     return (
       <div>
-        
-
         <div className="row">
           <ul className="list-group w-100">
             { list }
           </ul>
         </div>
-
       </div>
     )
   }
