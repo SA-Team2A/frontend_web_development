@@ -1,22 +1,24 @@
 import React from 'react'
 
 // Assets
-import no_image from '../../assets/no_image.jpg'
+import no_recipe from '../../assets/recipe.jpg'
 
 // Components
-import { Link } from 'react-router-dom'
 
 export default ({ recipe }) => {
   const { name, photos } = recipe
-  const recipe_photo = photos.length > 0 ? photos[0] : no_image
+  const recipe_photo = photos.length > 0 ? photos[0] : no_recipe
   return (
-    <div className="card recipe">
-      <img className="card-img-top" src={ recipe_photo } alt="recipeImage"/>
-      <div className="card-body">
-        <Link to={`/recipe/${recipe._id}`}>
-          <h5 className="card-title">{ name }</h5>
-        </Link>
+    <div>
+      <div className="d-flex w-100 justify-content-between">
+        <div className="col-md-1 my-auto">
+          <img src={ recipe_photo } alt="una foto" className="w-100"/>
+        </div>
+        <div className="col-md-11 my-auto">
+          <h5 className="mb-1">{ name }</h5>
+        </div>
       </div>
     </div>
+
   )
 }

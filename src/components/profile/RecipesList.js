@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 // Assets
-import add_button from '../../assets/add_button.png'
 
 // Components
 import RecipeTile from './RecipeTile'
@@ -13,30 +12,18 @@ export default class RecipesList extends Component {
     const { recipes, own } = this.props
 
     const list = recipes.map((recipe, index) =>
-      (<li key={ index } className="d-inline-block m-2">
+      (<Link to={`/recipe/${recipe._id}`} className="list-group-item list-group-item-action" key={ index }>
         <RecipeTile recipe={ recipe } />
-      </li>)
+      </Link>)
     )
 
     return (
-      <div className="container mx-auto">
-        <ul className="p-0 text-center">
-          {
-            own ?
-            <li key={0} className="d-inline-block m-2">
-              <div className="card recipe ">
-                <img className="card-img-top" src={ add_button } alt="recipeImage"/>
-                <div className="card-body">
-                  <Link to='/new_recipe'>
-                    <h5 className="card-title">Crear nueva receta</h5>
-                  </Link>
-                </div>
-              </div>
-            </li>
-            : null
-          }
-          { list }
-        </ul>
+      <div>
+        <div className="row">
+          <ul className="list-group w-100">
+            { list }
+          </ul>
+        </div>
       </div>
     )
   }

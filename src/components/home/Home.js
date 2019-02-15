@@ -6,7 +6,7 @@ import { auth_req } from '../../js/request'
 // Components
 import Error from '../utilities/Error'
 import Loading from '../utilities/Loading'
-import RecipeTile from '../profile/RecipeTile'
+import RecipesList from '../profile/RecipesList'
 
 export default class Home extends Component {
 
@@ -51,20 +51,11 @@ export default class Home extends Component {
     const { isLoaded, recipes } = this.state
 
     if (isLoaded) {
-
-      const list = recipes.map((recipe, index) =>
-        (<li key={ index } className="d-inline-block m-2">
-          <RecipeTile recipe={ recipe } />
-        </li>)
-      )
-
       return (
         <div className="container">
           <h2 className="gv-font">Recetas populares</h2>
           <div className="container mx-auto">
-            <ul className="p-0 text-center">
-              { list }
-            </ul>
+            <RecipesList own={false} recipes={ recipes } />
           </div>
         </div>
       )
