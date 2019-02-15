@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 // Assets
-import { join } from '../../js/utilities'
 import { auth_req } from '../../js/request'
 import user_img from '../../assets/user.svg'
 
@@ -9,7 +8,6 @@ import user_img from '../../assets/user.svg'
 import { Link } from 'react-router-dom'
 import Error from '../utilities/Error'
 import Loading from '../utilities/Loading'
-import Comment from '../comments/Comment'
 import CommentCreator from '../comments/CommentCreator'
 
 export default class Recipe extends Component {
@@ -19,7 +17,6 @@ export default class Recipe extends Component {
     this.state = {
       isLoaded: null,
       recipe: null,
-      users: [],
       comments: [],
       currentUser: null
     }
@@ -40,7 +37,6 @@ export default class Recipe extends Component {
           }
           preparation_time
           portions
-          photos
           ingredients
           steps
           user_id
@@ -48,11 +44,8 @@ export default class Recipe extends Component {
         comments: getCommentsByRecipeId(recipe_id: $id) {
           user_id
           comment
-          created_date
-        }
-        users: getUsers {
-          id
           username
+          created_date
         }
         currentUser: getMyUser {
           id
@@ -89,50 +82,17 @@ export default class Recipe extends Component {
   }
 
   render() {
-    const { isLoaded, recipe, comments, users, currentUser } = this.state
+    const { isLoaded, recipe, comments, currentUser } = this.state
     const { match: { params: { param } } } = this.props
 
     if (isLoaded) {
       document.title = recipe.name
       const { name, preparation_time, difficulty, portions, description, user_id,
-              ingredients, steps, photos } = recipe
-
-      const joinedQuery = join(comments, 'user_id', users, 'id')
-      const username = users.filter( u => u.id === user_id )[0].username
-
-      var carrouselPhotos = ( photos.length > 0 ) ? (
-        <div id="carouselPhotos" className="carousel slide" data-ride="carousel">
-          <ol className="carousel-indicators">
-            <li data-target="#carouselPhotos" data-slide-to="0" className="active"></li>
-            <li data-target="#carouselPhotos" data-slide-to="1"></li>
-            <li data-target="#carouselPhotos" data-slide-to="2"></li>
-          </ol>
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img className="d-block w-100" src="" alt="First slide"/>
-            </div>
-            <div className="carousel-item">
-              <img className="d-block w-100" src="" alt="Second slide"/>
-            </div>
-            <div className="carousel-item">
-              <img className="d-block w-100" src="" alt="Third slide"/>
-              </div>
-            </div>
-            <a className="carousel-control-prev" href="#carouselPhotos" role="button" data-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="sr-only">Previous</span>
-            </a>
-            <a className="carousel-control-next" href="#carouselPhotos" role="button" data-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="sr-only">Next</span>
-            </a>
-          </div>
-        ) : null
-
+              ingredients, steps } = recipe
+      const username = currentUser.username
 
       return (
         <div className="col-md-8 offset-md-2">
-          { carrouselPhotos }
           <div className="row">
             <h1 className="">{ name }</h1>
           </div>
@@ -181,18 +141,8 @@ export default class Recipe extends Component {
           </div>
           <hr/>
           <div className="row">
-            <CommentCreator currentUser={ currentUser } recipe_id={ param }/>
-          </div>
-          <div className="row">
-            <ul className="list-group w-100">
-              {
-                joinedQuery.map( (c, i) => (
-                  <li key={ i } value={ i } className="list-group-item">
-                    <Comment item={ c }/>
-                  </li>
-                ))
-              }
-            </ul>
+            <CommentCreator currentUser={ currentUser } recipe_id={ param }
+              comments= { comments }/>
           </div>
         </div>
       )

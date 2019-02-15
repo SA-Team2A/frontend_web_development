@@ -17,15 +17,15 @@ const UNAUTHED = false
 export const Routes = [
   { component: Landing,
     path: '/',
-    redirect: { when: AUTHED, to: '/home' }
+    redirect: { to: '/home', when: AUTHED }
   },
   { component: SignIn,
     path: '/signin',
-    redirect: { when: AUTHED, to: '/home'}
+    redirect: { to: '/home', when: AUTHED }
   },
   { component: SignUp,
     path: '/signup',
-    redirect: { when: AUTHED, to: '/home'}
+    redirect: { to: '/home', when: AUTHED }
   },
   { component: Home,
     path: '/home',
