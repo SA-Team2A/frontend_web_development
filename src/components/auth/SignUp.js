@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 // Assets
 import store from '../../js/store'
-import { req } from '../../js/request'
+import { req, auth_req } from '../../js/request'
 import { login } from '../../js/actions'
 
 // Components
@@ -42,7 +42,29 @@ export default class SignUp extends Component {
     req(body).then(
       res => {
         localStorage.setItem('token', res.data.data.createUser)
-        store.dispatch(login())
+        const body2 = {
+          query: `
+            mutation CreateCol($name: String!) {
+              createCollection(name: $name) {
+                id
+              	user_id
+              	name
+              }
+            }
+          `,
+          variables: {
+            name: 'Favoritos'
+          }
+        }
+        auth_req(body2).then(
+          res => {
+            store.dispatch(login())
+          }
+        ).catch(
+          err => {
+            console.log(err.response)
+          }
+        )
       }
     ).catch(
       err => {

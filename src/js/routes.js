@@ -7,6 +7,7 @@ import Profile from '../components/profile/Profile'
 import Recipe from '../components/recipes/Recipe'
 import RecipeForm from '../components/recipes/RecipeForm'
 import UpdateProfile from '../components/profile/UpdateProfile'
+import Collection from '../components/collections/Collection'
 
 // User status
 const AUTHED = true
@@ -47,5 +48,9 @@ export const Routes = [
   { component: UpdateProfile,
     path: '/update_profile',
     redirect: { to: '/signup', when: UNAUTHED }
+  },
+  { component: Collection,
+    path: '/collection/:param',
+    redirect: { to: '/', when: UNAUTHED }
   }
 ]

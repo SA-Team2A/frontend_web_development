@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 // Assets
 import user_img from '../../assets/user.svg'
 import { auth_req } from '../../js/request'
+import $ from 'jquery'
 
 // Components
 import Error from '../utilities/Error'
@@ -56,6 +57,11 @@ export default class MyProfile extends Component {
         console.log(err.response)
       }
     )
+  }
+
+  handleSubmit(e) {
+    this.handleClick(e)
+    $('#create_col_modal').modal('hide')
   }
 
   handleClick(e) {
@@ -156,7 +162,7 @@ export default class MyProfile extends Component {
                   </button>
                 </div>
                 <div className="modal-body">
-                  <form>
+                  <form onSubmit={ e => this.handleSubmit(e) }>
                     <div className="form-group">
                       <label htmlFor="recipient-name" className="col-form-label">Nombre:</label>
                       <input type="text" className="form-control" id="collection-name"/>

@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import Error from '../utilities/Error'
 import Loading from '../utilities/Loading'
 import CommentCreator from '../comments/CommentCreator'
+import CollectionsModal from '../collections/CollectionsModal'
 
 export default class Recipe extends Component {
 
@@ -115,10 +116,7 @@ export default class Recipe extends Component {
             </div>
           </div>
           <div className="row d-flex justify-content-center mt-3">
-            <button type="button" className="btn btn-outline-primary mr-2">
-              Agregar a Favoritos
-            </button>
-            <button type="button" className="btn btn-outline-primary">
+            <button type="button" className="btn btn-outline-dark" data-toggle="modal" data-target="#add_to_col_modal">
               Agregar a Colecciones
             </button>
           </div>
@@ -144,6 +142,7 @@ export default class Recipe extends Component {
             <CommentCreator currentUser={ currentUser } recipe_id={ param }
               comments= { comments }/>
           </div>
+          <CollectionsModal recipe_id={ param }/>
         </div>
       )
     } else if (isLoaded == null) {
