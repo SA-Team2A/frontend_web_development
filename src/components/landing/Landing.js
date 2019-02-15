@@ -10,7 +10,7 @@ export default class Landing extends Component {
   render() {
     document.title = 'Cucinapp'
     return (
-      <div>
+      <div className="adjust-margin">
         <div className="container-fluid">
           <div className="section">
             <div className="row">

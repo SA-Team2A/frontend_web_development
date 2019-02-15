@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 // Components
 import Error from '../utilities/Error'
 import Loading from '../utilities/Loading'
-import { Link } from 'react-router-dom'
 import RecipesList from '../profile/RecipesList'
 import { auth_req } from '../../js/request'
 
@@ -30,9 +29,9 @@ export default class Collection extends Component {
         }
         currentUser: getMyUser { username email }
         recipes: getCollectionRecipeById(id: $id) {
-          id
-          collection_id
-          recipe_id
+          ID
+          Collection_id
+          Recipe_id
           _id
           name
           portions
@@ -62,12 +61,10 @@ export default class Collection extends Component {
   }
 
   render() {
-    const { isLoaded, recipes, currentUser, collection } = this.state
-    const { match: { params: { param } } } = this.props
+    const { isLoaded, recipes, collection } = this.state
 
     if (isLoaded) {
       document.title = collection.name
-      const username = currentUser.username
 
       return (
         <div className="container">
@@ -84,7 +81,7 @@ export default class Collection extends Component {
               </button>
             </div>
           </div>
-          <RecipesList own={true} recipes={ recipes } />
+          <RecipesList recipes={ recipes } />
         </div>
       )
     } else if (isLoaded == null) {

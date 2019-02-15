@@ -9,7 +9,6 @@ export default class CollectionsModal extends Component {
 
   constructor(props) {
     super(props)
-    // this.checked = []
     this.state = {
       collections: [],
       isLoaded: null,
@@ -56,20 +55,25 @@ export default class CollectionsModal extends Component {
     e.preventDefault()
     const { collections, checked } = this.state
     const { recipe_id } = this.props
-    var body = { query: null, variables: null }
+    var body = null
+
+
     for (var i = 0; i < collections.length; i++) {
       if (!checked[i]) continue
-      body.query = `mutation addToCollections($input: CollectionRecipeInput!) {
-        addToCollection(input: $input) {
-          id
-        	collection_id
-        	recipe_id
-        }
-      }`
-      body.variables = {
-        input: {
-          collection_id: collections[i].id,
-          recipe_id: recipe_id
+      console.log(collections[i])
+      body = {
+        query: `mutation addToCollections($input: CollectionRecipeInput!) {
+          addToCollection(input: $input) {
+            id
+          	collection_id
+          	recipe_id
+          }
+        }`,
+        variables: {
+          input: {
+            collection_id: collections[i].id,
+            recipe_id: recipe_id
+          }
         }
       }
       auth_req(body).then(

@@ -6,8 +6,8 @@ import no_recipe from '../../assets/recipe.jpg'
 // Components
 
 export default ({ recipe }) => {
-  const { name, photos } = recipe
-  const recipe_photo = photos.length > 0 ? photos[0] : no_recipe
+  const { name } = recipe
+  const recipe_photo = no_recipe
   return (
     <div>
       <div className="d-flex w-100 justify-content-between">

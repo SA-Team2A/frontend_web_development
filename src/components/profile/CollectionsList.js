@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 export default class CollectionsList extends Component {
   render() {
-    const { collections, own } = this.props
+    const { collections } = this.props
     const list = collections.map( c =>
       (<Link to={ `/collection/${c.id}` } className="list-group-item list-group-item-action" key={ c.id }>
         <div className="d-flex w-100 justify-content-between">
